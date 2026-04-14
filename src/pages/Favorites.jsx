@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TopNav } from '../components/TopNav.jsx'
 import { InventoryGallery } from '../components/gallery/InventoryGallery.jsx'
 import { InventoryQuickView } from '../components/gallery/InventoryQuickView.jsx'
@@ -7,8 +7,18 @@ import { useFavorites } from '../hooks/useFavorites.js'
 
 export function Favorites() {
   const { items, loading, error } = useInventory()
-  const { favoriteIds, isFavorite, toggleFavorite } = useFavorites()
+  const { favoriteIds, isFavorite, toggleFavorite, removeFavorite } = useFavorites()
   const [selectedItem, setSelectedItem] = useState(null)
+
+  const existingIds = useMemo(() => new Set(items.map((item) => item.id)), [items])
+
+  useEffect(() => {
+    favoriteIds.forEach((id) => {
+      if (!existingIds.has(id)) {
+        removeFavorite(id)
+      }
+    })
+  }, [favoriteIds, existingIds, removeFavorite])
 
   const favoriteItems = useMemo(
     () => items.filter((item) => favoriteIds.includes(item.id)),

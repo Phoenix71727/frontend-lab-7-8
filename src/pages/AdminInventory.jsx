@@ -4,10 +4,12 @@ import { TopNav } from '../components/TopNav.jsx'
 import { InventoryTable } from '../components/inventory/InventoryTable.jsx'
 import { ConfirmModal } from '../components/inventory/ConfirmModal.jsx'
 import { useInventory } from '../store/InventoryContext.jsx'
+import { useFavorites } from '../hooks/useFavorites.js'
 import { deleteInventoryItem } from '../services/inventoryApi.js'
 
 export function AdminInventory() {
   const { items, loading, error, refreshInventory } = useInventory()
+  const { removeFavorite } = useFavorites()
   const [selectedItem, setSelectedItem] = useState(null)
   const [deleting, setDeleting] = useState(false)
 
@@ -19,6 +21,7 @@ export function AdminInventory() {
     setDeleting(true)
     try {
       await deleteInventoryItem(selectedItem.id)
+      removeFavorite(selectedItem.id)
       setSelectedItem(null)
       await refreshInventory()
     } catch {
