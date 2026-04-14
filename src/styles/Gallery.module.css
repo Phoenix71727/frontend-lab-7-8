@@ -1,0 +1,103 @@
+@keyframes cardIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.favoritesBar {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  position: relative;
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  animation: cardIn 0.28s ease both;
+}
+
+.card:hover .image {
+  transform: scale(1.06);
+}
+
+.favorite {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+  border: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.imageButton {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: #e8e0d5;
+  transition: transform 0.3s ease;
+}
+
+.meta {
+  padding: 12px;
+}
+
+.meta h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.skeletonCard {
+  border-radius: 16px;
+  min-height: 190px;
+  background: linear-gradient(90deg, #ece2d5 25%, #f4ede3 37%, #ece2d5 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (max-width: 680px) {
+  .favoritesBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,69 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    transform: translateY(14px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 11, 7, 0.48);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+  padding: 16px;
+  animation: fadeIn 0.18s ease;
+}
+
+.modal,
+.modalLarge {
+  width: min(560px, 100%);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  padding: 16px;
+  animation: riseIn 0.22s ease;
+}
+
+.modalLarge {
+  width: min(680px, 100%);
+}
+
+.actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.close {
+  border: 0;
+  background: transparent;
+  margin-left: auto;
+  display: block;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.quickImage {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
